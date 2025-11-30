@@ -4,15 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Harsh - Web Data Automation & Pipeline Engineer portfolio">
-  <title>Harsh — Portfolio</title>
+  <title>Portfolio</title>
 
-  <!-- Fixed path from "assist" to "assets" -->
+  <!-- Load CSS first -->
   <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Theme script in head to prevent flash -->
+  <script>
+    // Set theme immediately to prevent flash
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  
+  <!-- Main JS -->
   <script defer src="assets/js/main.js"></script>
 </head>
 
-<body data-theme="light">
-
+<body>
   <!-- ================= HEADER ================= -->
   <header class="nav">
     <a class="brand" href="#hero">Mr. HR</a>
@@ -23,7 +35,7 @@
       <a href="#skills">Skills</a>
       <a href="#resume">Resume</a>
       <a href="#contact">Contact</a>
-      <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
     </nav>
 
     <button class="nav-toggle" aria-label="Open menu">☰</button>
@@ -48,7 +60,6 @@
 
       <div class="hero-art">
         <div class="card profile-card">
-          <!-- Fixed path from "assist" to "assets" -->
           <img src="assets/images/profile-placeholder.png" alt="Harsh - Web Data Automation Engineer" />
         </div>
       </div>
@@ -178,16 +189,15 @@
     <!-- ================= RESUME ================= -->
     <section id="resume" class="section resume">
       <h2>Resume</h2>
-      <p class="lead">Download or view my resume below.</p>
+      <p class="lead">Download my resume to learn more about my experience and skills.</p>
 
       <div class="resume-actions">
         <a class="btn" href="assets/resume.pdf" download="Harsh_Resume.pdf">Download Resume</a>
-        <label class="btn ghost" for="upload">Replace Resume</label>
-        <input id="upload" type="file" accept="application/pdf" style="display:none">
       </div>
 
+      <!-- Lazy load the PDF to prevent auto-scroll -->
       <div class="resume-embed">
-        <iframe src="assets/resume.pdf" title="Harsh's Resume" loading="lazy"></iframe>
+        <iframe data-src="assets/resume.pdf" title="Harsh's Resume" loading="lazy"></iframe>
       </div>
     </section>
 
@@ -195,16 +205,27 @@
     <!-- ================= CONTACT ================= -->
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <p class="lead">Send a message or connect on social.</p>
+      <p class="lead">Send me a message and I'll get back to you soon.</p>
+
+      <!-- Simple Email Display -->
+      <div class="direct-contact">
+        <p><strong>Email me directly:</strong></p>
+        <div class="email-link">
+          <a href="mailto:harshrana20025@gmail.com">harshrana20025@gmail.com</a>
+          <button class="copy-email-btn" onclick="copyEmailToClipboard()" aria-label="Copy email to clipboard">
+            ✅
+          </button>
+        </div>
+      </div>
 
       <form id="contact-form" class="contact-form">
         <label>
-          Name
-          <input type="text" name="name" required minlength="2" placeholder="Your name">
+          Your Name
+          <input type="text" name="name" required minlength="2" placeholder="Enter your name">
         </label>
 
         <label>
-          Email
+          Your Email
           <input type="email" name="email" required placeholder="your.email@example.com">
         </label>
 
@@ -219,7 +240,7 @@
       </form>
 
       <div class="social-links">
-        <p>Or connect:</p>
+        <p>Connect with me:</p>
         <a href="https://github.com/harsh-rana-dev" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/admin-harsh/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
