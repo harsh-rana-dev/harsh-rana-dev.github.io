@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Harsh - Web Data Automation & Pipeline Engineer portfolio">
+  <title>Harsh — Portfolio</title>
 
+  <!-- Fixed path from "assist" to "assets" -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+</head>
+
+<body data-theme="light">
+
+  <!-- ================= HEADER ================= -->
+  <header class="nav">
+    <a class="brand" href="#hero">Mr. HR</a>
+    <nav class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Open menu">☰</button>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <main class="container">
+    <section id="hero" class="hero section">
+      <div class="hero-content">
+        <h1 class="display-name">Harsh</h1>
+        <p class="title">Web Data Automation & Pipeline Engineer</p>
+        <p class="intro">
+          I build reliable data pipelines, automation and web scraping systems so data teams can move faster.
+        </p>
+
+        <div class="hero-ctas">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn ghost" href="#contact">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="card profile-card">
+          <!-- Fixed path from "assist" to "assets" -->
+          <img src="assets/images/profile-placeholder.png" alt="Harsh - Web Data Automation Engineer" />
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="section about-intro">
+      <div class="about-grid">
+        <div class="card profile-card large">
+          <img src="assets/images/profile-placeholder.png" alt="Harsh - Profile Photo">
+        </div>
+
+        <div class="about-content">
+          <h2>Hi, I'm Harsh</h2>
+          <p class="lead">
+            I design and implement robust web scraping and data automation systems,
+            focusing on reliability, observability and scale.
+          </p>
+
+          <h3>Experience Summary</h3>
+          <ul class="bullets">
+            <li>Multiple production scraping pipelines (Scrapy, Playwright)</li>
+            <li>Designed CI/CD pipelines for data workflows</li>
+            <li>Deployed containerized workflows using Docker and cloud services</li>
+          </ul>
+
+          <h3>Areas of expertise</h3>
+          <div class="chips-wrap">
+            <span class="chip">Web scraping</span>
+            <span class="chip">Automation</span>
+            <span class="chip">Data pipelines</span>
+            <span class="chip">CI/CD</span>
+            <span class="chip">Infrastructure</span>
+            <span class="chip">Monitoring</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="section">
+      <h2>Ongoing Projects</h2>
+
+      <div class="grid projects-grid">
+        <article class="project-card">
+          <h3>Data Pipeline Orchestrator</h3>
+          <p>Lightweight orchestrator for scraping → cleaning → storing time-series data.</p>
+          <div class="badges">Docker · Airflow · PostgreSQL</div>
+          <div class="card-links">
+            <a href="#" aria-label="View Data Pipeline Orchestrator on GitHub">GitHub</a>
+            <a href="#" aria-label="View Data Pipeline Orchestrator demo">Demo</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Scalable Scraper Suite</h3>
+          <p>Distributed scraping platform with Playwright + Scrapy and proxy rotation.</p>
+          <div class="badges">Scrapy · Playwright · Bright Data</div>
+          <div class="card-links">
+            <a href="#" aria-label="View Scalable Scraper Suite on GitHub">GitHub</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <h3>Monitoring & Observability</h3>
+          <p>Automated dashboards and alerts for pipeline metrics.</p>
+          <div class="badges">Prometheus · Grafana · ScrapeOps</div>
+          <div class="card-links">
+            <a href="#" aria-label="View Monitoring & Observability on GitHub">GitHub</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <p class="lead">Organized by category — responsive badges and modern grid layout.</p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Scraping & Automation</h3>
+          <div class="badges-grid">Scrapy · Playwright · Requests · n8n.io</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Version Control & CI/CD</h3>
+          <div class="badges-grid">Git · GitHub · GitLab CI · GitHub Actions</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Data</h3>
+          <div class="badges-grid">Pandas · NumPy · PyTest</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Providers</h3>
+          <div class="badges-grid">Bright Data · 2Captcha</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Cloud</h3>
+          <div class="badges-grid">Docker · AWS · GCP</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Databases</h3>
+          <div class="badges-grid">PostgreSQL · Airflow</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Monitoring</h3>
+          <div class="badges-grid">Prometheus · Grafana · ScrapeOps</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Scripting</h3>
+          <div class="badges-grid">Python · Bash · Linux · YAML</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= RESUME ================= -->
+    <section id="resume" class="section resume">
+      <h2>Resume</h2>
+      <p class="lead">Download or view my resume below.</p>
+
+      <div class="resume-actions">
+        <a class="btn" href="assets/resume.pdf" download="Harsh_Resume.pdf">Download Resume</a>
+        <label class="btn ghost" for="upload">Replace Resume</label>
+        <input id="upload" type="file" accept="application/pdf" style="display:none">
+      </div>
+
+      <div class="resume-embed">
+        <iframe src="assets/resume.pdf" title="Harsh's Resume" loading="lazy"></iframe>
+      </div>
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p class="lead">Send a message or connect on social.</p>
+
+      <form id="contact-form" class="contact-form">
+        <label>
+          Name
+          <input type="text" name="name" required minlength="2" placeholder="Your name">
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" required placeholder="your.email@example.com">
+        </label>
+
+        <label>
+          Message
+          <textarea name="message" required minlength="10" placeholder="Your message..."></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Send Message</button>
+        </div>
+      </form>
+
+      <div class="social-links">
+        <p>Or connect:</p>
+        <a href="https://github.com/harsh-rana-dev" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/admin-harsh/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <p>© <span id="year"></span> Harsh - Web Data Automation & Pipeline Engineer</p>
+  </footer>
+</body>
+</html>
