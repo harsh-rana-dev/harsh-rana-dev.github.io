@@ -1,13 +1,14 @@
 // ========================
-// THEME TOGGLE
+// THEME TOGGLE - GitHub Pages Compatible
 // ========================
 const initTheme = () => {
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
 
-    // Get saved theme or default to light
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    htmlElement.setAttribute('data-theme', currentTheme);
+    // Get current theme from HTML attribute (set in head)
+    const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+    
+    // Update icon based on current theme
     updateThemeIcon(currentTheme);
 
     themeToggle.addEventListener('click', () => {
@@ -18,8 +19,52 @@ const initTheme = () => {
     });
 
     function updateThemeIcon(theme) {
-        themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
     }
+};
+
+// ========================
+// PREVENT AUTO-SCROLL TO RESUME
+// ========================
+const preventAutoScroll = () => {
+    // Reset scroll position to top on page load
+    window.addEventListener('load', () => {
+        if (window.location.hash !== '#resume') {
+            window.scrollTo(0, 0);
+        }
+    });
+
+    // Handle browser back/forward navigation
+    window.addEventListener('popstate', () => {
+        if (!window.location.hash) {
+            window.scrollTo(0, 0);
+        }
+    });
+
+    // Lazy load PDF iframe only when in viewport
+    const initLazyPDF = () => {
+        const pdfIframe = document.querySelector('.resume-embed iframe');
+        if (!pdfIframe) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    if (iframe.dataset.src && !iframe.src) {
+                        iframe.src = iframe.dataset.src;
+                    }
+                }
+            });
+        }, { 
+            rootMargin: '100px' // Load 100px before entering viewport
+        });
+
+        observer.observe(pdfIframe);
+    };
+
+    initLazyPDF();
 };
 
 // ========================
@@ -72,11 +117,16 @@ const initMobileNav = () => {
 const initSmoothScroll = () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
+            
+            // Don't prevent default for # links to maintain URL hash
+            if (targetId === '#') return;
+            
             const target = document.querySelector(targetId);
             
             if (target) {
+                e.preventDefault();
+                
                 // Calculate header height for offset
                 const headerHeight = document.querySelector('.nav').offsetHeight;
                 const targetPosition = target.offsetTop - headerHeight - 20;
@@ -127,7 +177,14 @@ const initContactForm = () => {
         submitBtn.disabled = true;
 
         setTimeout(() => {
-            showNotification(`Thank you, ${name}! Your message has been sent. I'll get back to you soon.`, 'success');
+            // In a real implementation, you would send this data to your email
+            // For GitHub Pages, you can use a service like Formspree or Netlify Forms
+            // Or simply show the mailto link
+            const subject = `Portfolio Message from ${name}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+            const mailtoLink = `mailto:harshrana20025@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            showNotification(`Thank you, ${name}! Your message has been sent to harshrana20025@gmail.com.`, 'success');
             form.reset();
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
@@ -136,36 +193,22 @@ const initContactForm = () => {
 };
 
 // ========================
-// RESUME UPLOAD
+// COPY EMAIL TO CLIPBOARD
 // ========================
-const initResumeUpload = () => {
-    const fileInput = document.getElementById('upload');
-    if (!fileInput) return;
-
-    fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        // Validate file type
-        if (file.type !== 'application/pdf') {
-            showNotification('Please upload a PDF file only.', 'error');
-            fileInput.value = '';
-            return;
-        }
-
-        // Validate file size (5MB)
-        if (file.size > 5 * 1024 * 1024) {
-            showNotification('File size must be less than 5MB.', 'error');
-            fileInput.value = '';
-            return;
-        }
-
-        // Preview the uploaded PDF
-        const iframe = document.querySelector('.resume-embed iframe');
-        if (iframe) {
-            iframe.src = URL.createObjectURL(file);
-            showNotification(`Resume "${file.name}" uploaded successfully!`, 'success');
-        }
+const copyEmailToClipboard = () => {
+    const email = 'harshrana20025@gmail.com';
+    
+    navigator.clipboard.writeText(email).then(() => {
+        showNotification('Email address copied to clipboard!', 'success');
+    }).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showNotification('Email address copied to clipboard!', 'success');
     });
 };
 
@@ -254,72 +297,14 @@ const showNotification = (message, type = 'info') => {
 };
 
 // ========================
-// INTERSECTION OBSERVER FOR ACTIVE NAV LINKS
-// ========================
-const initScrollSpy = () => {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
-    const observerOptions = {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => observer.observe(section));
-};
-
-// ========================
-// LAZY LOADING FOR IMAGES
-// ========================
-const initLazyLoading = () => {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        images.forEach(img => imageObserver.observe(img));
-    } else {
-        // Fallback for older browsers
-        images.forEach(img => {
-            img.src = img.dataset.src;
-        });
-    }
-};
-
-// ========================
 // INITIALIZE EVERYTHING
 // ========================
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    preventAutoScroll();
     initMobileNav();
     initSmoothScroll();
     initContactForm();
-    initResumeUpload();
-    initScrollSpy();
-    initLazyLoading();
 
     // Set current year in footer
     const yearSpan = document.getElementById('year');
@@ -331,32 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('loaded');
 });
 
-// ========================
-// PERFORMANCE OPTIMIZATIONS
-// ========================
-// Debounce function for scroll events
-const debounce = (func, wait) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
-
-// Handle window resize
-window.addEventListener('resize', debounce(() => {
-    // Close mobile menu on resize to desktop
-    if (window.innerWidth > 768) {
-        const navLinks = document.querySelector('.nav-links');
-        const navToggle = document.querySelector('.nav-toggle');
-        if (navLinks && navToggle) {
-            navLinks.classList.remove('active');
-            navToggle.setAttribute('aria-expanded', 'false');
-            navToggle.textContent = '☰';
-        }
+// Handle page show event for better back/forward navigation
+window.addEventListener('pageshow', (event) => {
+    // If the page was loaded from cache, ensure we're at the top
+    if (event.persisted && !window.location.hash) {
+        window.scrollTo(0, 0);
     }
-}, 250));
+});
