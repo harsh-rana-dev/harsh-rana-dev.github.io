@@ -659,3 +659,77 @@ a:focus-visible {
     --shadow: 0 0 0 1px #000000;
   }
 }
+
+/* ========================
+   CONTACT SECTION UPDATES
+   ======================== */
+.direct-contact {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.direct-contact p {
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.email-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.email-link a {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.email-link a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.copy-email-btn {
+  background: var(--accent-light);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: var(--font-size-lg);
+}
+
+.copy-email-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Resume Section - Single Button */
+.resume-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* Responsive Design for Contact Section */
+@media (max-width: 768px) {
+  .email-link {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .email-link a {
+    font-size: var(--font-size-base);
+  }
+}
